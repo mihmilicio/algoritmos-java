@@ -1,0 +1,7 @@
+Soma total: 684
+Soma A: 174
+Soma B: 184
+Soma C: 25
+Soma D: 59
+Soma E: 42
+Soma F: 200

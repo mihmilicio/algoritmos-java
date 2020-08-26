@@ -1,14 +1,13 @@
 package com.company;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.net.URL;
 import java.util.Scanner;
 
-public class ExFix5 {
+public class ExFix6 {
 
-    public static void main(String[] args) throws FileNotFoundException {
-        URL url = ExFix5.class.getResource("grupos_tabulados.txt");
+    public static void main(String[] args) throws IOException {
+        URL url = ExFix6.class.getResource("grupos_tabulados.txt");
         File arquivo = new File(url.getPath());
         Scanner leitor = new Scanner(arquivo);
         leitor.nextLine();
@@ -43,10 +42,19 @@ public class ExFix5 {
 
         leitor.close();
 
-        System.out.println("Soma total: " + somaTotal);
+
+        String urlOut = "./src/" + ExFix6.class.getPackage().getName().replace(".", "/");
+        FileWriter arquivoOut = new FileWriter(urlOut + "/numeros.txt");
+        PrintWriter gravador = new PrintWriter(arquivoOut);
+
+        gravador.println("Soma total: " + somaTotal);
 
         for (int i = 0; i < grupos.length; i++) {
-            System.out.println("Soma "+ grupos[i] + ": " + somaGrupos[i]);
+            gravador.println("Soma "+ grupos[i] + ": " + somaGrupos[i]);
         }
+
+        gravador.close();
+
+        System.out.println("Resultado do processament gravado em \"numeros.txt\"");
     }
 }
