@@ -8,6 +8,7 @@ public class ExFix6 {
 
     public static void main(String[] args) throws IOException {
         URL url = ExFix6.class.getResource("grupos_tabulados.txt");
+        System.out.println(url);
         File arquivo = new File(url.getPath());
         Scanner leitor = new Scanner(arquivo);
         leitor.nextLine();

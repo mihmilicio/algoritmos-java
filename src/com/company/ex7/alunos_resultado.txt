@@ -1,0 +1,6 @@
+Quantidade de alunos: 70
+Quantidade de aprovados: 39
+Quantidade de reprovados: 31
+Menor nota: 0.0
+Maior nota: 9.5
+Média geral: 5.62
