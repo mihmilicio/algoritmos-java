@@ -1,0 +1,9 @@
+Cliente mais antigo: FABIO CESAR DOS REIS FELIX
+
+Cliente(s) com mais crédito: 
+	VALDIRENE MARIA DE BORBA DA SILVA
+	ROBSON MACHADO
+
+Existem clientes duplicados: Sim
+
+Valor total de crédito: 3675847.0
