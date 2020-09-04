@@ -2,6 +2,9 @@ package com.company.atv3;
 
 import java.io.*;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,8 +52,9 @@ public class At3 {
         boolean allUnique = listCliente.stream().map(cliente -> cliente.cpf).allMatch(new HashSet<>()::add);
         gravador.println("Existem clientes duplicados: " + (!allUnique ? "Sim" : "Não") + "\n");
 
+        NumberFormat formatter = new DecimalFormat("#,##0.00", new DecimalFormatSymbols(new Locale ("pt", "BR")));
         double soma = listCliente.stream().mapToDouble(cliente -> cliente.credito).sum();
-        gravador.print("Valor total de crédito: " + soma);
+        gravador.print("Valor total de crédito: R$" + formatter.format(soma));
 
         gravador.close();
 

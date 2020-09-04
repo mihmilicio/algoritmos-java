@@ -6,4 +6,4 @@ Cliente(s) com mais crédito:
 
 Existem clientes duplicados: Sim
 
-Valor total de crédito: 3675847.0
+Valor total de crédito: R$3.675.847,00
