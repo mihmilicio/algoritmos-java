@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class At3 {
     public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         URL url = At3.class.getResource("clientes.csv");
-        List<Cliente> listCliente = FileProcessor.processar(Cliente.class, url, "com.company.atv3.Cliente");
+        List<Cliente> listCliente = FileProcessor.processar(Cliente.class, url, "com.company.atv3.Cliente", ";", true);
 
         PrintWriter gravador = Reporter.create("./src/com/company/atv3/relatorio_clientes.txt");
 

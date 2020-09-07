@@ -12,10 +12,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileProcessor {
-    public static <T> List<T> processar (Class<T> type, URL url, String className) throws FileNotFoundException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T> List<T> processar (Class<T> type, URL url, String className, String separator, boolean skipHeader) throws FileNotFoundException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         File arquivo = new File(url.getPath());
         Scanner leitor = new Scanner(new FileInputStream(arquivo));
-        leitor.nextLine();
+        if (skipHeader) {
+            leitor.nextLine();
+        }
 
         List<T> genList = new ArrayList<>();
 
@@ -23,7 +25,7 @@ public class FileProcessor {
         Constructor<?> constructor = clazz.getConstructor(String[].class);
 
         while (leitor.hasNextLine()) {
-            String[] conteudo = leitor.nextLine().split(";");
+            String[] conteudo = leitor.nextLine().split(separator);
             if (conteudo.length > 1) {
                 genList.add((T) constructor.newInstance((Object) conteudo));
             }
