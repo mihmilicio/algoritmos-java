@@ -6,10 +6,10 @@ public class Cliente {
     public int codigo;
     public double credito;
 
-    public Cliente(String cpf, String nome, int codigo, double credito) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.codigo = codigo;
-        this.credito = credito;
+    public Cliente(String[] conteudo) {
+        this.cpf = conteudo[0];
+        this.nome = conteudo[1];
+        this.codigo = Integer.parseInt(conteudo[2]);
+        this.credito = Double.parseDouble(conteudo[3].replace(",", "."));
     }
 }

@@ -1,6 +1,10 @@
 package com.company.atv3;
 
+import com.company.generics.FileProcessor;
+import com.company.generics.Reporter;
+
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -9,43 +13,20 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class At3 {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         URL url = At3.class.getResource("clientes.csv");
-        File arquivo = new File(url.getPath());
-        Scanner leitor = new Scanner(new FileInputStream(arquivo));
-        leitor.nextLine();
+        List<Cliente> listCliente = FileProcessor.processar(Cliente.class, url, "com.company.atv3.Cliente");
 
-        List<Cliente> listCliente = new ArrayList<Cliente>();
+        PrintWriter gravador = Reporter.create("./src/com/company/atv3/relatorio_clientes.txt");
 
-        while (leitor.hasNextLine()) {
-            String[] conteudo = leitor.nextLine().split(";");
-            if (conteudo.length > 1) {
-                try {
-                    listCliente.add(new Cliente(
-                            conteudo[0],
-                            conteudo[1],
-                            Integer.parseInt(conteudo[2]),
-                            Double.parseDouble(conteudo[3].replace(',', '.'))
-                    ));
-                } catch (NumberFormatException ignored) {};
-            }
-        }
-        leitor.close();
-
-        String urlOut = "./src/" + At3.class.getPackage().getName().replace(".", "/");
-        FileWriter arquivoOut = new FileWriter(urlOut + "/relatorio_clientes.txt");
-        PrintWriter gravador = new PrintWriter(arquivoOut);
-
-        listCliente.sort((a, b) -> (int) (a.codigo - b.codigo)); // menor pro maior
+        listCliente.sort((a, b) -> a.codigo - b.codigo); // menor pro maior
         gravador.println("Cliente mais antigo: " + listCliente.get(0).nome + "\n");
 
         List<Double> listaValores = listCliente.stream().map(cliente -> cliente.credito).collect(Collectors.toList());
-        double maxCredito = (double) Collections.max(listaValores);
+        double maxCredito = Collections.max(listaValores);
         List<Cliente> maioresClientes = listCliente.stream().filter(cliente -> cliente.credito == maxCredito).collect(Collectors.toList());
         gravador.println("Cliente(s) com mais crédito: ");
-        maioresClientes.forEach(cliente -> {
-            gravador.println("\t" + cliente.nome);
-        });
+        maioresClientes.forEach(cliente -> gravador.println("\t" + cliente.nome));
         gravador.println();
 
 
