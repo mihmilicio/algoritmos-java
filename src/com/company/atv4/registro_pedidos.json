@@ -1,0 +1,15 @@
+{
+  "pedidos": [
+    {
+      "itens": [
+        {
+          "categoria": "PRATO",
+          "nome": "Filé de frango com molho de mostarda",
+          "preco": 12.5
+        }
+      ],
+      "observacao": "sjdhjdkhs",
+      "precoTotal": 12.5
+    }
+  ]
+}
